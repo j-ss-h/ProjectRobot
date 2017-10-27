@@ -1,0 +1,16 @@
+3 steps to submitting to GitHub: using MinGW
+1.) git add --all
+2.) git commit -m "Commit message"
+3.) git push
+
+Group Collaboration
+1.) Make a fork (Press the fork button, it's not very hard)
+2.) Clone your fork (YOUR fork, not anybody else)
+	2.1.) You can clone it by pressing the clone button, and copying link into your commandline
+	2.2.) git clone <clone link>
+3.) Add your changes, and use the above three steps to push it to your fork
+4.) Go to the original repo (The one your forked) and press pull request
+5.) You will compare across forks and try to merge the branches
+6.) Wait for the git repo master to accept (or deny) your changes
+
+Finally, everytime you want to use git, git pull before you do anything else.
