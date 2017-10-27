@@ -16,6 +16,7 @@ int main()
 
 	// testing room template
 	Room test;
+	cout << "test\n"; // testline!!!!!!!!!!!!!!!!!!
 	cout << test << endl;
 
 	return 0;

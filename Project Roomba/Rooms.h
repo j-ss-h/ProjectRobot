@@ -7,7 +7,6 @@ struct dimensionsRoom
 {
 	int xSize;// height
 	int ySize;// width
-	int floor;// z coordinate
 };
 
 
@@ -16,14 +15,14 @@ class Room
 protected:
 	int roomID;
 	dimensionsRoom size;
-	vector <vector <char> > mapRoom;
+	vector <vector <char> > mapRoom;// map of room WITHOUT exterior walls. 
+	vector <Object> objRoom;// container for all objects within Room. 
 
 public:
 	Room()
 	{
 		size.xSize = 5;
 		size.ySize = 5;
-		size.floor = 1;
 		roomTemplate(size);
 	}
 
@@ -31,7 +30,6 @@ public:
 	{
 		size.xSize = item.xSize;
 		size.ySize = item.ySize;
-		size.floor = item.floor;
 	}
 
 	dimensionsRoom getSize() const // possibly useful for fullMap
@@ -46,50 +44,42 @@ public:
 
 	void roomTemplate(dimensionsRoom & item)
 	{
-		int xNew = item.xSize + 2;
-		int yNew = item.ySize + 2;
-		vector <vector <char> > empty;
-		mapRoom.push_back(empty);
-		for (int x = 0; x < xNew; x++)
+		for (int x = 0; x < item.xSize; x++)
 			// creates initial 2-d vector filled with '.'
 		{
 			vector <char> temp;
-			for (int y = 0; y < yNew; y++)
+			for (int y = 0; y < item.ySize; y++)
 			{
 				temp.push_back('.');
 			}
 			mapRoom.push_back(temp);
-		}
-		for (int i = 0; i <= xNew; i *= xNew)
-		{
-			for (int fill = 0; fill < yNew; fill++)
-			{
-				mapRoom[fill][i] = '#';
-			}
-			i++;
-		}
-		for (int j = 0; j <= yNew; j *= yNew)
-		{
-			for (int fill = 0; fill < yNew; fill++)
-			{
-				mapRoom[j][fill] = '#';
-			}
-			j++;
 		}
 
 	}
 
 	friend ostream & operator <<(ostream & out, Room item)
 	{
-		for (int x = 0; x < item.size.xSize + 2; x++)
+		for (int i = 0; i < item.size.xSize + 2; i++)
 		{
-			for (int y = 0; y < item.size.ySize + 2; y++)
-			{
-				out << item.mapRoom[x][y];
-			}
-			out << endl;
+			out << "# ";
 		}
 		out << endl;
+		
+		for (int x = 0; x < item.size.xSize; x++)
+		{
+			out << "# ";
+			for (int y = 0; y < item.size.ySize; y++)
+			{
+				out << item.mapRoom[x][y] << " ";
+			}
+			out << "#" << endl;
+		}
+		for (int i = 0; i < item.size.xSize + 2; i++)
+		{
+			out << "# ";
+		}
+		out << endl;
+		
 		return out;
 	}
 };

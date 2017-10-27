@@ -3,7 +3,7 @@
 2.) git commit -m "Commit message"
 3.) git push
 
-Group Collaboration
+Group Collaboration: using MinGW
 1.) Make a fork (Press the fork button, it's not very hard)
 2.) Clone your fork (YOUR fork, not anybody else)
 	2.1.) You can clone it by pressing the clone button, and copying link into your commandline
