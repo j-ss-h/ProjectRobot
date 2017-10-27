@@ -1,8 +1,10 @@
 #include "Database.h"
 
 #include <iostream>
+
 using namespace std;
-void main()
+
+int main()
 {
 	// testing inheritance
 	/*/
@@ -15,4 +17,6 @@ void main()
 	// testing room template
 	Room test;
 	cout << test << endl;
+
+	return 0;
 }
