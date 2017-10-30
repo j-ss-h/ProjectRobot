@@ -1,6 +1,9 @@
 #include <iostream>
+using namespace std;
+#ifndef STATEMACHINE
+#define STATEMACHINE
 
-class StateMachine {		
+class StateMachine {
 	public:
 		enum State { NOT_ASSIGNED,IDLE TRAVERSE, RETREATING};
 		State currentState = NOT_ASSIGNED;
@@ -16,14 +19,14 @@ class StateMachine {
 		void SetRetreating();
 };
 
-void SetState(State currentState) {
+void StateMachine::SetState(State currentState) {
 	if (this->currentState != NOT_ASSIGNED) {
 		this->previousState = this->currentState;
 	}
 	this->currentState = currentState;
 }
 
-void SwitchToPreviousState(State currentState) {
+void StateMachine::SwitchToPreviousState(State currentState) {
 	if (this->previousState != NOT_ASSIGNED) {
 		State temp = currentState;
 		this->currentState = this->previousState;
@@ -64,3 +67,5 @@ void SetRetreating(){//Gets out of dodge to return map
 	SetState(RETREATING);
 
 }
+
+#endif
