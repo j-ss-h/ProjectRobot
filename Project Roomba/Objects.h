@@ -1,3 +1,7 @@
+//this is the base level object in the project. 
+#ifndef OBJECT
+#define OBJECT
+
 #include <iostream>
 using namespace std;
 
@@ -96,3 +100,4 @@ public:
 		symbol = 'E';// this should be variable... need A for armed.
 	}
 };
+#endif

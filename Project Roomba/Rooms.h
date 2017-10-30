@@ -1,3 +1,7 @@
+//this is a class that contains Objects 
+#ifndef ROOM
+#define ROOM
+
 #include "Objects.h"
 #include <iostream>
 #include <vector>
@@ -21,8 +25,8 @@ protected:
 public:
 	Room()
 	{
-		size.xSize = 5;
-		size.ySize = 5;
+		size.xSize = 5;// used to test
+		size.ySize = 5;// used to test
 		roomTemplate(size);
 	}
 
@@ -58,6 +62,8 @@ public:
 	}
 
 	friend ostream & operator <<(ostream & out, Room item)
+		//called by Database.h
+		//needs to account for objects, and "shift" doors and windows outward into the walls. 
 	{
 		for (int i = 0; i < item.size.xSize + 2; i++)
 		{
@@ -83,3 +89,4 @@ public:
 		return out;
 	}
 };
+#endif
