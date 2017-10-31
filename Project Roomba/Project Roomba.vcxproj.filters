@@ -13,6 +13,15 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Resource Files\Input-%28building%29">
+      <UniqueIdentifier>{416f5fa3-f417-4ca4-98e7-ef0d19b31ec9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Input-%28building%29\Floor1">
+      <UniqueIdentifier>{43f79234-6e57-4057-bad7-4e40a5d73697}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Input-%28building%29\Basement1">
+      <UniqueIdentifier>{c384c096-c7db-4aa2-b434-a29af02ec80b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="driver.cpp">
@@ -35,5 +44,10 @@
     <ClInclude Include="States.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="f1r1.txt">
+      <Filter>Resource Files\Input-%28building%29\Floor1</Filter>
+    </Text>
   </ItemGroup>
 </Project>

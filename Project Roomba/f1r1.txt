@@ -1,0 +1,7 @@
+roomID: f1r1
+dimensions: 10 10
+object door: 0 4
+object door: 4 0
+object door: 4 9
+object window: 9 4
+object obstruction: 2 3

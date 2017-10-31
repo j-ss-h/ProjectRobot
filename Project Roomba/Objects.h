@@ -8,8 +8,8 @@ using namespace std;
 struct coordinateObject
 	// structure to hold the grid coordinates of Object in Room. 
 {
-	int row;
-	int col;
+	int row = 0;
+	int col = 0;
 };
 // OUTPUT OPERATOR TO TEST COORDINATE!!!!!!!!!!!!!!!!!!!!!!!
 ostream & operator <<(ostream & out, coordinateObject value)
@@ -27,12 +27,11 @@ protected:
 	char symbol;
 
 public:
-	void setLocation()
+	void setLocation(coordinateObject info)
 		// assigns the values of coordinate struct in Object. 
 	{
-		// fix this assignment. 
-		location.row = 1;
-		location.col = 1;
+		location.row = info.row;
+		location.col = info.col;
 	}
 
 	coordinateObject getLocation() const
@@ -62,6 +61,7 @@ public:
 	Door() : Object()
 	{
 		symbol = '|';// this should be variable... need L for locked. 
+		// next = ID of room on other side of door. 
 	}
 };
 

@@ -1,7 +1,8 @@
 #include "Database.h"
-#include "States.h"
+//#include "States.h"
 
 #include <iostream>
+#include <fstream>// for input file
 using namespace std;
 
 int main()
@@ -15,9 +16,16 @@ int main()
 	*/
 
 	// testing room template
+	/*
 	Room test;
-	cout << "test\n";
 	cout << test << endl;
+	*/
+
+	//testing room input from file
+	/**/
+	Room test("f1r1.txt");
+	cout << test << endl;
+	/**/
 
 	return 0;
 }
