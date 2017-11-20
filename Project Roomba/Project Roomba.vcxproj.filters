@@ -30,6 +30,12 @@
     <ClCompile Include="driver.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Objects.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Rooms.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Database.h">
@@ -102,6 +108,9 @@
     </Text>
     <Text Include="b1r311.txt">
       <Filter>Resource Files\Input-%28building%29\Basement1</Filter>
+    </Text>
+    <Text Include="BuildingInfo.txt">
+      <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>
 </Project>

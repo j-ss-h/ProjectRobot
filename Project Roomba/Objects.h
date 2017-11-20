@@ -1,109 +1,109 @@
-//this is the base level object in the project. 
+/*
+File Name: Objects.h
+Programming: Deanna Tatum, Jesse A. Hankins, Kyle Meystedt
+			 Southeast Missouri State University
+			 CS300-01
+Date Last Modified: ??/??/????
+
+Description:
+coordinateObject is a structure that holds the grid coordinates of an Object's placement in a Room. 
+
+Object is a superclass that contains THE member variables and set/get functions for its descendants.
+	Object(): default constructor. 
+	setNext(): accepts a string. sets value of next for Doors and Stairs. returns nothing. 
+	setLocation(): accepts a coordinateObject. sets the value of location for any Object. returns nothing. 
+	getLocation(): accepts nothing. returns a coordinateObject of the value of location for an Object. 
+	setSymbol(): accepts a char. assigns the symbol of Object. Used for Doors, Stairs, Obstructions, and Entities. returns nothing. 
+	getSymbol(): accepts nothing. returns a char of the symbol of any Object. 
+
+Door is a subclass of Object with its own constructor. 
+	Door(): default constructor. assigns symbol to '|' which can be changed based on ********CHANCE***************
+
+Stairs is a subclass of Object with its own constructor. 
+	Stairs(): default constructor. symbol is assigned when the object is created by Rooms.h
+
+Window is a subclass of Object with its own constructor. 
+	Window(): default constructor. assigns symbol to 'W'
+
+Obstruction is a subclass of Object with its own constructor. 
+	Obstruction(): default constructor. symbol is assigned based on ********CHANCE***************
+
+Entity is a subclass of Object with its own constructor. 
+	Entity(): default constructor. symbol is assigned based on ********CHANCE***************
+*/
+
 #ifndef OBJECT
 #define OBJECT
-
 #include <iostream>
 using namespace std;
 
 struct coordinateObject
-	// structure to hold the grid coordinates of Object in Room. 
+	// structure that holds the grid coordinates of an Object's placement in a Room. 
 {
 	int row = 0;
 	int col = 0;
 };
-// OUTPUT OPERATOR TO TEST COORDINATE!!!!!!!!!!!!!!!!!!!!!!!
-ostream & operator <<(ostream & out, coordinateObject value)
-{
-	out << "row: " << value.row << "\ncol: " << value.col << endl;
-	return out;
-}
-// END OF TEST FUNCTION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 class Object
-	// superclass: contains member variables and the set/get functions for children. 
+	// Object is a superclass that contains member variables and the set/get functions for its descendants.
 {
 protected:
-	coordinateObject location;
-	char symbol;
-	string next; // ID of room on other side of door/stairs. 
+	coordinateObject location; // location of Object within Room. 
+	char symbol; // char used to denote Object for display purposes. 
+	string next; // ID of Room on other side of Door/Stairs. 
 
 public:
-	void setLocation(coordinateObject info)
-		// assigns the values of coordinate struct in Object. 
-	{
-		location.row = info.row;
-		location.col = info.col;
-	}
+	Object();
+	// default constructor. 
 
-	void setNext(string info)
-		// assigns the value of next for doors and stairs. 
-	{
-		next = info;
-	}
+	void setNext(string info);
+	// accepts a string. sets value of next for Doors and Stairs. returns nothing. 
 
-	coordinateObject getLocation() const
-		// returns coordinate struct of Object.
-	{
-		return location;
-	}
+	void setLocation(coordinateObject info);
+	// accepts a coordinateObject. sets the value of location for any Object. returns nothing. 
 
-	char getSymbol() const
-		// returns symbol of Object. 
-	{
-		return symbol;
-	}
+	coordinateObject getLocation() const;
+	// accepts nothing. returns a coordinateObject of the value of location for an Object. 
 
-	Object()
-		// default constructor. 
-	{
-		// contents can be erased after testing. 
-		location.row = 0;
-		location.col = 0;
-	}
+	void setSymbol(char value);
+	// accepts a char. assigns the symbol of Object. Used for Doors, Stairs, Obstructions, and Entities. returns nothing.
+
+	char getSymbol() const;
+	// accepts nothing. returns a char of the symbol of any Object. 
 };
 
 class Door : public Object
 {
 public:
-	Door() : Object()
-	{
-		symbol = '|';// this should be variable... need L for locked. 
-	}
+	Door();
+	// default constructor. assigns symbol to '|' which can be changed based on ********CHANCE***************
 };
 
 class Stairs : public Object
 {
 public:
-	Stairs() : Object()
-	{
-		symbol = 'U';// this should be variable... need D for down. 
-	}
+	Stairs();
+	// default constructor. symbol is assigned when the object is created by Rooms.h
 };
 
 class Window : public Object
 {
 public:
-	Window() : Object()
-	{
-		symbol = 'W';
-	}
+	Window();
+	// default constructor. assigns symbol to 'W'
 };
 
 class Obstruction : public Object
 {
 public:
-	Obstruction() : Object()
-	{
-		symbol = 'O';
-	}
+	Obstruction();
+	// default constructor. symbol is assigned based on ********CHANCE***************
 };
 
 class Entity : public Object
 {
 public:
-	Entity() : Object()
-	{
-		symbol = 'E';// this should be variable... need A for armed.
-	}
+	Entity();
+	// default constructor. symbol is assigned based on ********CHANCE***************
 };
 #endif

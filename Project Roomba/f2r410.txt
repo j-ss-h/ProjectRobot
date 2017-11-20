@@ -1,4 +1,4 @@
 roomID: f2r410
 dimensions: 2 3
 object door: 0 1 f2r310
-object stairs: 0 0 f1r410
+object stairs: 1 0 f1r410

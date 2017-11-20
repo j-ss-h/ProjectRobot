@@ -5,8 +5,22 @@
 #include <fstream>// for input file
 using namespace std;
 
+/* 
+These are the probabilities for each negatively impacting category for the robot. 
+The user can modify these through the menu. 
+*/
+int entityarmed = 0, obstructionThreat = 0, doorLocked = 0, robotFound = 0, robotCompromised = 0;
+void menu();
+void probability();
+
 int main()
 {
+	// menu options. NOT CURRENTLY IN USE. Enter 0 to bypass. 
+	cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n"
+		 << "!!!!!Menu is not currently in use. Enter 0 to bypass.!!!!!\n"
+		 << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n\n"; // TEMPORARY
+	menu();
+
 	// testing inheritance
 	/*/
 	Stairs test;
@@ -22,7 +36,7 @@ int main()
 	*/
 
 	//testing room input from file
-	/**/
+	
 	Room test1("f1r110.txt");
 	cout << test1 << endl;
 	Room test2("f1r210.txt");
@@ -35,33 +49,155 @@ int main()
 	cout << test5 << endl;
 	Room test6("f1r311.txt");
 	cout << test6 << endl;
-	Room test7("f1r410.txt");
+	Room test7("f1r410.txt"); // first floor room with stairs. 
 	cout << test7 << endl;
-	/**/
 
+	Room test8("f2r410.txt"); // second floor room with stairs. 
+	cout << test8 << endl;
+	Room test9("b1r410.txt"); // basement room with stairs. 
+	cout << test9 << endl;
+	
 	return 0;
 }
-/*
-BUILDING INFO:
-The entire building (input) is in a single file with subfolders consisting of floors. Each floor folder contains text files representing
-the information gathered when scanning a room.
 
-Room Name Formatting: f/b#r###.txt
-	"f/b#" denotes if it is a floor (increasing from 1 while ascending) or a basement (increasing from 1 while descending).
-	"r###" denotes room. The first digit represents the "row" of the floor/building using the top-most row as 1. The two following
-		digits represent the "column" of the room in the floor using 10 as an arbitrary center.
+void menu()
+{
+	int choice = 1;
+	bool deployed = false;
+	while (choice != 0)
+	{
+		cout << "***STARTING MENU***\n"
+			<< "1.) Set probabilities\n"
+			<< "2.) Deploy Robot (run program)\n"
+			<< "3.) View Mission Log\n"
+			<< "4.) Review Reconnaissance Info\n"
+			<< "0.) Exit\n"
+			<< "Selection: ";
+		cin >> choice;
+		switch (choice)
+		{
+		case 1:
+			probability();
+			break;
+		case 2:
+			/*
+			This is where the state machine will be called. 
+			*/
+			deployed = true;
+			break;
+		case 3:
+			if (deployed == true)
+			{
+				cout << "Not yet implemented...\n"; // PLACEHOLDER!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			}
+			else cout << "Robot has not been deployed...\n";
+			break;
+		case 4:
+			if (deployed == true)
+			{
+				cout << "Not yet implemented...\n"; // PLACEHOLDER!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			}
+			else cout << "Robot has not been deployed...\n";
+			break;
+		case 0:
+			cout << "Exiting program...\n";
+			break;
+		default:
+			cout << "Invalid entry...\n";
+			break;
+		}
+		puts("");
+	}
+}
 
-	EXAMPLE: f1r110.txt; denotes floor 1, room of floor row 1 in arbitrary center of 10.
-	EXAMPLE: b1r308.txt; denotes basement 1, room of floor row 3 that is left of arbitrary center by 2 rooms.
-
-Room Contents Formatting:
-	"roomID: ***" A string containing the room name, omitting ".txt".
-	"dimensions: # #" The dimensions (row, column) of the room in linear feet scaled back by half (value * 2 = actual distance).
-	"object door/stairs/window/obstruction/entity # # ?"
-		The two digits represent the position of the object within the room (index of row, column).
-		The ? is only used for traversable objects (ie: door or stairs) and contains the roomID of the next area.
-
-	EXAMPLE: object door 0 4 f1r109
-		a door located at row 0, column 4 in it's room (shifted out to wall when displaying) that leads to
-		room f1r109 (see above for room name explanation).
-*/
+void probability()
+{
+	int prob = 1;
+	while (prob != 0)
+	{
+		cout << "\n***PROBABILITY MENU***\n"
+			<< "1.) Entity armed\n"
+			<< "2.) Obstruction threat\n"
+			<< "3.) Doors locked\n"
+			<< "4.) Robot found\n"
+			<< "5.) Robot compromised after found\n"
+			<< "0.) Return to previous menu\n"
+			<< "Selection: ";
+		cin >> prob;
+		switch (prob)
+		{
+		case 1:
+			cout << "Enter the probability of entities being armed (1-100): ";
+			cin >> prob;
+			if (prob > 0 && prob < 101)
+			{
+				entityarmed = prob;
+			}
+			else
+			{
+				prob = 1;
+				cout << "Invalid entry...\nPlease enter a value between 1 and 100.\n";
+			}
+			break;
+		case 2:
+			cout << "Enter the probability of obstructions being a threat (1-100): ";
+			cin >> prob;
+			if (prob > 0 && prob < 101)
+			{
+				obstructionThreat = prob;
+			}
+			else
+			{
+				prob = 1;
+				cout << "Invalid entry...\nPlease enter a value between 1 and 100.\n";
+			}
+			break;
+		case 3:
+			cout << "Enter the probability of doors being locked (1-100): ";
+			cin >> prob;
+			if (prob > 0 && prob < 101)
+			{
+				doorLocked = prob;
+			}
+			else
+			{
+				prob = 1;
+				cout << "Invalid entry...\nPlease enter a value between 1 and 100.\n";
+			}
+			break;
+		case 4:
+			cout << "Enter the probability of being found by entities (1-100): ";
+			cin >> prob;
+			if (prob > 0 && prob < 101)
+			{
+				robotFound = prob;
+			}
+			else
+			{
+				prob = 1;
+				cout << "Invalid entry...\nPlease enter a value between 1 and 100.\n";
+			}
+			break;
+		case 5:
+			cout << "Enter the probability of being compromised after being found (1-100): ";
+			cin >> prob;
+			if (prob > 0 && prob < 101)
+			{
+				robotCompromised = prob;
+			}
+			else
+			{
+				prob = 1;
+				cout << "Invalid entry...\nPlease enter a value between 1 and 100.\n";
+			}
+			break;
+		case 0:
+			cout << "Returning to previous menu...\n";
+			break;
+		default:
+			cout << "Invalid entry...\n";
+			break;
+		}
+	}
+	puts("");
+}

@@ -147,6 +147,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="driver.cpp" />
+    <ClCompile Include="Objects.cpp" />
+    <ClCompile Include="Rooms.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Database.h" />
@@ -162,6 +164,7 @@
     <Text Include="b1r309.txt" />
     <Text Include="b1r311.txt" />
     <Text Include="b1r410.txt" />
+    <Text Include="BuildingInfo.txt" />
     <Text Include="f1r110.txt" />
     <Text Include="f1r309.txt" />
     <Text Include="f1r209.txt" />
