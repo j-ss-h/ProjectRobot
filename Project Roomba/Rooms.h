@@ -91,7 +91,7 @@ public:
 					tempC.row = (tempC.row * 10) + ((int)input[targetInfo] - 48); // reduces ASCII value to digit after typecasting
 				}
 				targetInfo++;
-				for (; targetInfo < input.size(); targetInfo++) // loops until end of line
+				for (; targetInfo < input.size() && !isspace(input[targetInfo]); targetInfo++) // loops until end of line or space is found (for door/stairs).
 				{
 					tempC.col = (tempC.col * 10) + ((int)input[targetInfo] - 48); // reduces ASCII value to digit after typecasting
 				}
@@ -99,8 +99,15 @@ public:
 				/* this block creates the object and pushes it back into vector objRoom */
 				if (tempS == "door")
 				{
+					targetInfo += 1;
+					tempS = "";
+					for (; targetInfo < input.size(); targetInfo++)
+					{
+						tempS += input[targetInfo];
+					}
 					Door *door = new Door;
 					(*door).setLocation(tempC);
+					(*door).setNext(tempS);
 					objRoom.push_back(door);
 				}
 				else if(tempS == "window")
@@ -111,8 +118,15 @@ public:
 				}
 				else if(tempS == "stairs")
 				{
+					targetInfo += 1;
+					tempS = "";
+					for (; targetInfo < input.size(); targetInfo++)
+					{
+						tempS += input[targetInfo];
+					}
 					Stairs *stairs = new Stairs;
 					(*stairs).setLocation(tempC);
+					(*stairs).setNext(tempS);
 					objRoom.push_back(stairs);
 				}
 				else if(tempS == "obstruction")

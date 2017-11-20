@@ -156,7 +156,24 @@
     <ClInclude Include="States.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="f1r1.txt" />
+    <Text Include="b1r209.txt" />
+    <Text Include="b1r210.txt" />
+    <Text Include="b1r211.txt" />
+    <Text Include="b1r309.txt" />
+    <Text Include="b1r311.txt" />
+    <Text Include="b1r410.txt" />
+    <Text Include="f1r110.txt" />
+    <Text Include="f1r309.txt" />
+    <Text Include="f1r209.txt" />
+    <Text Include="f1r210.txt" />
+    <Text Include="f1r211.txt" />
+    <Text Include="f1r311.txt" />
+    <Text Include="f1r410.txt" />
+    <Text Include="f2r210.txt" />
+    <Text Include="f2r309.txt" />
+    <Text Include="f2r310.txt" />
+    <Text Include="f2r311.txt" />
+    <Text Include="f2r410.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

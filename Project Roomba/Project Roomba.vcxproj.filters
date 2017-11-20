@@ -22,6 +22,9 @@
     <Filter Include="Resource Files\Input-%28building%29\Basement1">
       <UniqueIdentifier>{c384c096-c7db-4aa2-b434-a29af02ec80b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Input-%28building%29\Floor2">
+      <UniqueIdentifier>{8223aaf7-dbae-4517-9c84-3a35cca402cb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="driver.cpp">
@@ -46,8 +49,59 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="f1r1.txt">
+    <Text Include="f1r110.txt">
       <Filter>Resource Files\Input-%28building%29\Floor1</Filter>
+    </Text>
+    <Text Include="f1r210.txt">
+      <Filter>Resource Files\Input-%28building%29\Floor1</Filter>
+    </Text>
+    <Text Include="f1r410.txt">
+      <Filter>Resource Files\Input-%28building%29\Floor1</Filter>
+    </Text>
+    <Text Include="f1r209.txt">
+      <Filter>Resource Files\Input-%28building%29\Floor1</Filter>
+    </Text>
+    <Text Include="f1r211.txt">
+      <Filter>Resource Files\Input-%28building%29\Floor1</Filter>
+    </Text>
+    <Text Include="f1r309.txt">
+      <Filter>Resource Files\Input-%28building%29\Floor1</Filter>
+    </Text>
+    <Text Include="f1r311.txt">
+      <Filter>Resource Files\Input-%28building%29\Floor1</Filter>
+    </Text>
+    <Text Include="f2r210.txt">
+      <Filter>Resource Files\Input-%28building%29\Floor2</Filter>
+    </Text>
+    <Text Include="f2r309.txt">
+      <Filter>Resource Files\Input-%28building%29\Floor2</Filter>
+    </Text>
+    <Text Include="f2r310.txt">
+      <Filter>Resource Files\Input-%28building%29\Floor2</Filter>
+    </Text>
+    <Text Include="f2r311.txt">
+      <Filter>Resource Files\Input-%28building%29\Floor2</Filter>
+    </Text>
+    <Text Include="f2r410.txt">
+      <Filter>Resource Files\Input-%28building%29\Floor2</Filter>
+    </Text>
+    <Text Include="b1r410.txt">
+      <Filter>Resource Files\Input-%28building%29\Basement1</Filter>
+    </Text>
+    <Text Include="b1r210.txt">
+      <Filter>Resource Files\Input-%28building%29\Basement1</Filter>
+    </Text>
+    <Text Include="b1r209.txt">
+      <Filter>Resource Files\Input-%28building%29\Basement1</Filter>
+    </Text>
+    <Text Include="b1r211.txt">
+      <Filter>Resource Files\Input-%28building%29\Basement1</Filter>
+    </Text>
+    <Text Include="b1r309.txt">
+      <Filter>Resource Files\Input-%28building%29\Basement1</Filter>
+    </Text>
+    <Text Include="b1r311.txt">
+      <Filter>Resource Files\Input-%28building%29\Basement1</Filter>
     </Text>
   </ItemGroup>
 </Project>

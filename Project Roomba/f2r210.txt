@@ -1,0 +1,5 @@
+roomID: f2r210
+dimensions: 4 11
+object door: 3 1 f2r309
+object door: 3 5 f2r310
+object door: 3 9 f2r311

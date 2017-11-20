@@ -25,6 +25,7 @@ class Object
 protected:
 	coordinateObject location;
 	char symbol;
+	string next; // ID of room on other side of door/stairs. 
 
 public:
 	void setLocation(coordinateObject info)
@@ -32,6 +33,12 @@ public:
 	{
 		location.row = info.row;
 		location.col = info.col;
+	}
+
+	void setNext(string info)
+		// assigns the value of next for doors and stairs. 
+	{
+		next = info;
 	}
 
 	coordinateObject getLocation() const
@@ -61,7 +68,6 @@ public:
 	Door() : Object()
 	{
 		symbol = '|';// this should be variable... need L for locked. 
-		// next = ID of room on other side of door. 
 	}
 };
 

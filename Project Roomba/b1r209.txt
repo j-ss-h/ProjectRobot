@@ -1,0 +1,3 @@
+roomID: b1r209
+dimensions: 2 3
+object door: 0 2 b1r210
