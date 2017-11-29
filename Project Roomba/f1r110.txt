@@ -1,4 +1,4 @@
 roomID: f1r110
 dimensions: 4 7
-object door: 0 3 exit
-object door: 3 3 f1r210
+object door: 0 3 exit u
+object door: 3 3 f1r210 d

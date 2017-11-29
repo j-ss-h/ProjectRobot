@@ -13,9 +13,10 @@ Room Name Formatting: f/b#r###.txt
 Room Contents Formatting:
 	"roomID: ***" A string containing the room name, omitting ".txt".
 	"dimensions: # #" The dimensions (row, column) of the room in linear feet scaled back by half (value * 2 = actual distance).
-	"object door/stairs/window/obstruction/entity # # ?"
+	"object door/stairs/window/obstruction/entity # # ? !"
 		The two digits represent the position of the object within the room (index of row, index of column).
 		The ? is only used for traversable objects (ie: door or stairs) and contains the roomID of the next area.
+		The ! is only used for objects that need to shift for display purposes (ie: doors or windows) and denote the direction of shift. 
 
 	EXAMPLE: object door 0 4 f1r109
 		a door located at row 0, column 4 in it's room (shifted out to wall when displaying) that leads from its room to

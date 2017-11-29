@@ -86,19 +86,23 @@ Room::Room(string file)// explicit constructor
 			{
 				targetInfo += 1;
 				tempS = "";
-				for (; targetInfo < input.size(); targetInfo++)
+				for (; !isspace(input[targetInfo]); targetInfo++)
 				{
 					tempS += input[targetInfo];
 				}
 				Door *door = new Door;
 				(*door).setLocation(tempC);
 				(*door).setNext(tempS);
+				targetInfo += 1;
+				(*door).setShift(input[targetInfo]);
 				objRoom.push_back(door);
 			}
 			else if (tempS == "window")
 			{
 				Window *window = new Window;
 				(*window).setLocation(tempC);
+				targetInfo += 1;
+				(*window).setShift(input[targetInfo]);
 				objRoom.push_back(window);
 			}
 			else if (tempS == "stairs")
@@ -187,4 +191,76 @@ void Room::setRoom(dimensionsRoom & item)
 vector <vector <char> > Room::getRoom() const
 {
 	return mapRoom;
+}
+
+void Room::displayRoom() const
+{
+	vector < vector < char > > room;
+	vector < char > temp;
+	char shift;
+	int row, col;
+
+	// this block creates the 2-dimensional vector. 
+	for (int y = 0; y < size.ySize + 2; y++)
+		// assigns the top wall
+	{
+		temp.push_back('#');
+	}
+	room.push_back(temp);
+	for (int x = 0; x < size.xSize; x++)
+	{
+		temp[0] = '#'; // assigns left wall
+		for (int y = 1; y < size.ySize + 1; y++)
+			// assigns space between walls
+		{
+			temp[y] = mapRoom[x][y - 1];
+		}
+		temp[size.ySize + 1] = '#'; // assigns right wall
+		room.push_back(temp);
+	}
+	for (int y = 0; y < size.ySize + 2; y++)
+		// assigns bottom wall
+	{
+		temp[y] = '#';
+	}
+	room.push_back(temp);
+
+	// this block performs symbol shifts for Doors and Windows
+	for (int x = 0; x < objRoom.size(); x++)
+	{
+		shift = (*objRoom[x]).getShift();
+		row = ((*objRoom[x]).getLocation()).row;
+		col = ((*objRoom[x]).getLocation()).col;
+		if (shift == 'u') // shift up
+		{
+			room[row][col + 1] = room[row + 1][col + 1];
+			room[row + 1][col + 1] = '.';
+		}
+		else if(shift == 'd') // shift down
+		{
+			room[row + 2][col + 1] = room[row + 1][col + 1];
+			room[row + 1][col + 1] = '.';
+		}
+		else if(shift == 'l') // shift left
+		{
+			room[row + 1][col] = room[row + 1][col + 1];
+			room[row + 1][col + 1] = '.';
+		}
+		else if(shift == 'r') // shift right
+		{
+			room[row+ 1][col + 2] = room[row + 1][col + 1];
+			room[row + 1][col + 1] = '.';
+		}
+	}
+
+	// this block outputs the 2-dimensional vector to screen. 
+	for (int x = 0; x < size.xSize + 2; x++)
+	{
+		for (int y = 0; y < size.ySize + 2; y++)
+		{
+			cout << room[x][y] << " ";
+		}
+		cout << endl;
+	}
+	cout << endl << endl;
 }

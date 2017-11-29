@@ -9,7 +9,7 @@ using namespace std;
 These are the probabilities for each negatively impacting category for the robot. 
 The user can modify these through the menu. 
 */
-int entityarmed = 0, obstructionThreat = 0, doorLocked = 0, robotFound = 0, robotCompromised = 0;
+int ENTITY_ARMED = 0, OBSTRUCTION_THREAT = 0, DOOR_LOCKED = 0, ROBOT_FOUND = 0, ROBOT_COMPROMISED = 0;
 void menu();
 void probability();
 
@@ -21,41 +21,10 @@ int main()
 		 << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n\n"; // TEMPORARY
 	menu();
 
-	// testing inheritance
-	/*/
-	Stairs test;
-	cout << "symbol: " << test.getSymbol() << endl;
-	test.setLocation();
-	cout << "location: \n" << test.getLocation() << endl;
-	*/
+	//testing room display function
 
-	// testing room template
-	/*
-	Room test;
-	cout << test << endl;
-	*/
-
-	//testing room input from file
-	
 	Room test1("f1r110.txt");
-	cout << test1 << endl;
-	Room test2("f1r210.txt");
-	cout << test2 << endl;
-	Room test3("f1r209.txt");
-	cout << test3 << endl;
-	Room test4("f1r211.txt");
-	cout << test4 << endl;
-	Room test5("f1r309.txt");
-	cout << test5 << endl;
-	Room test6("f1r311.txt");
-	cout << test6 << endl;
-	Room test7("f1r410.txt"); // first floor room with stairs. 
-	cout << test7 << endl;
-
-	Room test8("f2r410.txt"); // second floor room with stairs. 
-	cout << test8 << endl;
-	Room test9("b1r410.txt"); // basement room with stairs. 
-	cout << test9 << endl;
+	test1.displayRoom();
 	
 	return 0;
 }
@@ -63,6 +32,7 @@ int main()
 void menu()
 {
 	int choice = 1;
+	bool prob = false;
 	bool deployed = false;
 	while (choice != 0)
 	{
@@ -77,13 +47,20 @@ void menu()
 		switch (choice)
 		{
 		case 1:
-			probability();
+			if (prob == false)
+			{
+				probability();
+				prob = true;
+			}
+			else cout << "Probabilities have been set. Exit and restart to set new values...\n";
 			break;
 		case 2:
-			/*
-			This is where the state machine will be called. 
-			*/
-			deployed = true;
+			if (prob == true)
+			{
+				cout << "Not yet implemented...\n"; // PLACEHOLDER!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+				deployed = true;
+			}
+			else cout << "Probabilities have not been set...\n";
 			break;
 		case 3:
 			if (deployed == true)
@@ -121,7 +98,7 @@ void probability()
 			<< "3.) Doors locked\n"
 			<< "4.) Robot found\n"
 			<< "5.) Robot compromised after found\n"
-			<< "0.) Return to previous menu\n"
+			<< "0.) Save changes (unchanged values default to 0)\n"
 			<< "Selection: ";
 		cin >> prob;
 		switch (prob)
@@ -131,7 +108,7 @@ void probability()
 			cin >> prob;
 			if (prob > 0 && prob < 101)
 			{
-				entityarmed = prob;
+				ENTITY_ARMED = prob;
 			}
 			else
 			{
@@ -144,7 +121,7 @@ void probability()
 			cin >> prob;
 			if (prob > 0 && prob < 101)
 			{
-				obstructionThreat = prob;
+				OBSTRUCTION_THREAT = prob;
 			}
 			else
 			{
@@ -157,7 +134,7 @@ void probability()
 			cin >> prob;
 			if (prob > 0 && prob < 101)
 			{
-				doorLocked = prob;
+				DOOR_LOCKED = prob;
 			}
 			else
 			{
@@ -170,7 +147,7 @@ void probability()
 			cin >> prob;
 			if (prob > 0 && prob < 101)
 			{
-				robotFound = prob;
+				ROBOT_FOUND = prob;
 			}
 			else
 			{
@@ -183,7 +160,7 @@ void probability()
 			cin >> prob;
 			if (prob > 0 && prob < 101)
 			{
-				robotCompromised = prob;
+				ROBOT_COMPROMISED = prob;
 			}
 			else
 			{
@@ -199,5 +176,4 @@ void probability()
 			break;
 		}
 	}
-	puts("");
 }

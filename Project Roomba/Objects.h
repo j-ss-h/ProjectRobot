@@ -11,10 +11,13 @@ coordinateObject is a structure that holds the grid coordinates of an Object's p
 Object is a superclass that contains THE member variables and set/get functions for its descendants.
 	Object(): default constructor. 
 	setNext(): accepts a string. sets value of next for Doors and Stairs. returns nothing. 
+	getNext(): accepts nothing. returns a string of the RoomID of the next room for Doors and Stairs. 
 	setLocation(): accepts a coordinateObject. sets the value of location for any Object. returns nothing. 
 	getLocation(): accepts nothing. returns a coordinateObject of the value of location for an Object. 
 	setSymbol(): accepts a char. assigns the symbol of Object. Used for Doors, Stairs, Obstructions, and Entities. returns nothing. 
 	getSymbol(): accepts nothing. returns a char of the symbol of any Object. 
+	setShift(): accepts char. assigns the shift of Object. Used for Doors and Windows. returns nothing. 
+	getShift(): accepts nothing. returns a char of the shift of an Object. 
 
 Door is a subclass of Object with its own constructor. 
 	Door(): default constructor. assigns symbol to '|' which can be changed based on ********CHANCE***************
@@ -51,6 +54,7 @@ protected:
 	coordinateObject location; // location of Object within Room. 
 	char symbol; // char used to denote Object for display purposes. 
 	string next; // ID of Room on other side of Door/Stairs. 
+	char shift; // char denoting the direction to shift the symbol (door or window) of Object for display purposes.
 
 public:
 	Object();
@@ -58,6 +62,9 @@ public:
 
 	void setNext(string info);
 	// accepts a string. sets value of next for Doors and Stairs. returns nothing. 
+
+	string getNext();
+	// accepts nothing. returns a string of the RoomID of the next room for Doors and Stairs. 
 
 	void setLocation(coordinateObject info);
 	// accepts a coordinateObject. sets the value of location for any Object. returns nothing. 
@@ -70,6 +77,12 @@ public:
 
 	char getSymbol() const;
 	// accepts nothing. returns a char of the symbol of any Object. 
+
+	void setShift(char value);
+	// accepts char. assigns the shift of Object. Used for Doors and Windows. returns nothing. 
+
+	char getShift() const;
+	// accepts nothing. returns a char of the shift of an Object. 
 };
 
 class Door : public Object

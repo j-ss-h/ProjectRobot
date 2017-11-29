@@ -1,7 +1,7 @@
 roomID: b1r210
 dimensions: 4 3
-object door: 0 0 b1r209
-object door: 0 2 b1r211
-object door: 2 0 b1r309
-object door: 2 2 b1r311
-object door: 3 1 b1r410
+object door: 0 0 b1r209 l
+object door: 0 2 b1r211 r
+object door: 2 0 b1r309 l
+object door: 2 2 b1r311 r
+object door: 3 1 b1r410 d

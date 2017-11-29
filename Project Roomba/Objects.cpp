@@ -10,6 +10,11 @@ void Object::setNext(string info)
 	next = info;
 }
 
+string Object::getNext()
+// accepts nothing. returns a string of the RoomID of the next room for Doors and Stairs. 
+{
+	return next;
+}
 void Object::setLocation(coordinateObject info)
 	// assigns the values of coordinate struct in Object. 
 {
@@ -24,15 +29,27 @@ coordinateObject Object::getLocation() const
 }
 
 void Object::setSymbol(char value)
-	// assigns the symbol of Object. Used for dors and stairs. 
+// assigns the symbol of Object. Used for doors and stairs. 
 {
 	symbol = value;
 }
 
 char Object::getSymbol() const
-	// returns symbol of Object. 
+// returns symbol of Object. 
 {
 	return symbol;
+}
+
+void Object::setShift(char value)
+// assigns the shift of Object. Used for doors and windows. 
+{
+	shift = value;
+}
+
+char Object::getShift() const
+// returns shift of Object. 
+{
+	return shift;
 }
 
 Object::Object()
@@ -41,6 +58,7 @@ Object::Object()
 	// contents can be erased after testing. 
 	location.row = 0;
 	location.col = 0;
+	shift = '0';
 }
 
 Door::Door() : Object()
