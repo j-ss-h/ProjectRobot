@@ -146,13 +146,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Building.cpp" />
     <ClCompile Include="driver.cpp" />
     <ClCompile Include="Objects.cpp" />
     <ClCompile Include="Rooms.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Database.h" />
-    <ClInclude Include="Maps.h" />
+    <ClInclude Include="Building.h" />
     <ClInclude Include="Objects.h" />
     <ClInclude Include="Rooms.h" />
     <ClInclude Include="States.h" />

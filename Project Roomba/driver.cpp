@@ -1,5 +1,6 @@
-#include "Database.h"
+#include "Building.h"
 //#include "States.h"
+//#include "Maps.h"
 
 #include <iostream>
 #include <fstream>// for input file
@@ -21,10 +22,25 @@ int main()
 		 << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n\n"; // TEMPORARY
 	menu();
 
-	//testing room display function
-
-	Room test1("f1r110.txt");
-	test1.displayRoom();
+	//testing Building printRoom function
+	/*
+	Building test1("f1r110.txt");
+	test1.add("f1r210.txt");
+	test1.add("f1r209.txt");
+	test1.add("f1r211.txt");
+	test1.add("f1r309.txt");
+	test1.add("f1r311.txt");
+	test1.add("f1r410.txt");
+	test1.printRoom("f1r110.txt");
+	test1.printRoom("f1r209.txt");
+	test1.printRoom("f1r210.txt");
+	test1.printRoom("f1r211.txt");
+	test1.printRoom("f1r309.txt");
+	test1.printRoom("f1r311.txt");
+	test1.printRoom("f1r410.txt");
+	*/
+	//test1.printFloor(); // used to confirm pointer functionality
+	
 	
 	return 0;
 }

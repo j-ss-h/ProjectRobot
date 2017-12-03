@@ -1,5 +1,3 @@
-//this is the base level object in the project. 
-
 #include "Objects.h";
 #include <iostream>
 using namespace std;
@@ -15,6 +13,21 @@ string Object::getNext()
 {
 	return next;
 }
+
+/*
+void Object::setNextPtr(Room nextRoom)
+// accepts a Room. sets the address of nextPtr to that room. returns nothing. 
+{
+	nextPtr = &nextRoom;
+}
+
+Room * Object::getNextPtr()
+// accepts nothing. returns the pointer nextPtr. 
+{
+	return nextPtr;
+}
+*/
+
 void Object::setLocation(coordinateObject info)
 	// assigns the values of coordinate struct in Object. 
 {

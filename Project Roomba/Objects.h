@@ -38,6 +38,8 @@ Entity is a subclass of Object with its own constructor.
 #ifndef OBJECT
 #define OBJECT
 #include <iostream>
+#include <string>
+//#include "Rooms.h"
 using namespace std;
 
 struct coordinateObject

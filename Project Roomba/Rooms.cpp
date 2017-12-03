@@ -158,6 +158,11 @@ Room::Room(string file)// explicit constructor
 	fin.close();
 }
 
+string Room::getRoomID()
+{
+	return roomID;
+}
+
 void Room::setSize(dimensionsRoom & item)
 {
 	size.xSize = item.xSize;
@@ -167,6 +172,12 @@ void Room::setSize(dimensionsRoom & item)
 dimensionsRoom Room::getSize() const // possibly useful for fullMap
 {
 	return size;
+}
+
+vector < Object* > Room::getObjects() const
+// accepts nothing. returns the vector objRoom. 
+{
+	return objRoom;
 }
 
 void Room::setRoom(dimensionsRoom & item)

@@ -36,21 +36,21 @@
     <ClCompile Include="Rooms.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Building.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Database.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Objects.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Rooms.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Maps.h">
+    <ClInclude Include="States.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="States.h">
+    <ClInclude Include="Building.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
