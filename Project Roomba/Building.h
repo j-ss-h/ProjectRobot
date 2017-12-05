@@ -21,7 +21,7 @@ using namespace std;
 
 class Building
 {
-private:
+protected:
 	class Node
 	{
 	public:
@@ -81,5 +81,34 @@ public:
 	void printFloor(/* not sure... */);
 
 	void printBuilding(); // not coded...
+
+	// these functions are to facilitate traversal:
+	Node *getRoot()
+	{
+		return root;
+	}
+
+	bool findNext(vector <Node *> & tempV, Node* & ptr)
+		//ptr points to current Node; tempV is the waypoint vector of States.h
+	{
+		bool paths = false; 
+		Node *parentPtr = ptr;
+		for (int x = 0; x < ptr->pathwayPtrs.size(); x++)
+		{
+			if ((ptr != parentPtr) && (parentPtr->pathwayPtrs[x] == NULL))
+				// moves ptr to the first unexplored room. 
+			{
+				tempV.push_back(parentPtr->pathwayPtrs[x]);
+			}
+			else if (parentPtr->pathwayPtrs[x] == NULL)
+				// stores other unexplored pathways in tempV. 
+			{
+				paths = true;
+				add((*parentPtr->pathways[x]).getNext() + ".txt");
+				ptr = parentPtr->pathwayPtrs[x];
+			}
+		}
+		return paths; // true if unexplored pathways found; otherwise false. 
+	}
 };
 #endif

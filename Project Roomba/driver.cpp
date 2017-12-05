@@ -1,6 +1,4 @@
-#include "Building.h"
-//#include "States.h"
-//#include "Maps.h"
+#include "States.h"
 
 #include <iostream>
 #include <fstream>// for input file
