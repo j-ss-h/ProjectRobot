@@ -8,17 +8,18 @@ using namespace std;
 These are the probabilities for each negatively impacting category for the robot. 
 The user can modify these through the menu. 
 */
-int ENTITY_ARMED = 0, OBSTRUCTION_THREAT = 0, DOOR_LOCKED = 0, ROBOT_FOUND = 0, ROBOT_COMPROMISED = 0;
-void menu();
-void probability();
+
+void menu(StateMachine& bot);
+void probability(StateMachine& bot);
 
 int main()
 {
+	StateMachine wall_e;
 	// menu options. NOT CURRENTLY IN USE. Enter 0 to bypass. 
 	cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n"
 		 << "!!!!!Menu is not currently in use. Enter 0 to bypass.!!!!!\n"
 		 << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n\n"; // TEMPORARY
-	menu();
+	menu(wall_e);
 
 	//testing Building printRoom function
 	/*
@@ -43,7 +44,7 @@ int main()
 	return 0;
 }
 
-void menu()
+void menu(StateMachine &bot)
 {
 	int choice = 1;
 	bool prob = false;
@@ -63,7 +64,7 @@ void menu()
 		case 1:
 			if (prob == false)
 			{
-				probability();
+				probability(bot);
 				prob = true;
 			}
 			else cout << "Probabilities have been set. Exit and restart to set new values...\n";
@@ -101,7 +102,7 @@ void menu()
 	}
 }
 
-void probability()
+void probability(StateMachine& bot)
 {
 	int prob = 1;
 	while (prob != 0)
@@ -110,8 +111,8 @@ void probability()
 			<< "1.) Entity armed\n"
 			<< "2.) Obstruction threat\n"
 			<< "3.) Doors locked\n"
-			<< "4.) Robot found\n"
-			<< "5.) Robot compromised after found\n"
+			<< "4.) Entity unarmed\n"
+			//<< "5.) Robot compromised after found\n"
 			<< "0.) Save changes (unchanged values default to 0)\n"
 			<< "Selection: ";
 		cin >> prob;
@@ -122,7 +123,7 @@ void probability()
 			cin >> prob;
 			if (prob > 0 && prob < 101)
 			{
-				ENTITY_ARMED = prob;
+				bot.setArmedProbability(prob);
 			}
 			else
 			{
@@ -135,7 +136,7 @@ void probability()
 			cin >> prob;
 			if (prob > 0 && prob < 101)
 			{
-				OBSTRUCTION_THREAT = prob;
+				bot.setObstructionProbability(prob);
 			}
 			else
 			{
@@ -148,7 +149,7 @@ void probability()
 			cin >> prob;
 			if (prob > 0 && prob < 101)
 			{
-				DOOR_LOCKED = prob;
+				bot.setLockedDoorProbability(prob);
 			}
 			else
 			{
@@ -157,11 +158,11 @@ void probability()
 			}
 			break;
 		case 4:
-			cout << "Enter the probability of being found by entities (1-100): ";
+			cout << "Enter the probability of being found by unarmed entities (1-100): ";
 			cin >> prob;
 			if (prob > 0 && prob < 101)
 			{
-				ROBOT_FOUND = prob;
+				bot.setUnarmedProbability(prob);
 			}
 			else
 			{
@@ -169,7 +170,7 @@ void probability()
 				cout << "Invalid entry...\nPlease enter a value between 1 and 100.\n";
 			}
 			break;
-		case 5:
+		/*case 5:
 			cout << "Enter the probability of being compromised after being found (1-100): ";
 			cin >> prob;
 			if (prob > 0 && prob < 101)
@@ -181,7 +182,7 @@ void probability()
 				prob = 1;
 				cout << "Invalid entry...\nPlease enter a value between 1 and 100.\n";
 			}
-			break;
+			break;*/
 		case 0:
 			cout << "Returning to previous menu...\n";
 			break;

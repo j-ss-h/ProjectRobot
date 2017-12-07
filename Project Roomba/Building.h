@@ -98,7 +98,9 @@ public:
 			if ((ptr != parentPtr) && (parentPtr->pathwayPtrs[x] == NULL))
 				// moves ptr to the first unexplored room. 
 			{
-				tempV.push_back(parentPtr->pathwayPtrs[x]);
+				Node* temp = parentPtr;
+				tempV.push_back(temp);
+				//tempV.push_back(parentPtr->pathwayPtrs[x]);
 			}
 			else if (parentPtr->pathwayPtrs[x] == NULL)
 				// stores other unexplored pathways in tempV. 

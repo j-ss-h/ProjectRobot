@@ -4,7 +4,10 @@
 
 #include "Building.h"
 #include <iostream>
+#include <stdlib.h>
+#include <fstream>
 using namespace std;
+
 
 class StateMachine : private Building
 {
@@ -12,7 +15,12 @@ class StateMachine : private Building
 private:
 	Node *ptr = NULL;
 	vector <Node *> wayPoint;
-	int wayPointIndex = 0;
+	int wayPointIndex = 0, entityCount=0;
+	bool compromisedCheck = false, lockedDoorCheck = false, obstructionCheck=false;
+	int ARMED_SAVE = 20, UNARMED_SAVE = 15, LOCKED_DOOR = 10, OBSTRUCTION=5;//SAVE THROW PROBABILITY OUT OF 100
+
+	ofstream log; 
+	
 	// new section
 
 public:
@@ -39,10 +47,12 @@ public:
 			Example: randomNumber > ROBOT_FOUND
 			***NOTE: You can skip this part and just add a comment near the code where an evaluation would take place. 
 	*/
-	enum State { NOT_ASSIGNED, IDLE, TRAVERSE, RETREATING, COMPROMISED, COMPLETE };
+	enum State { NOT_ASSIGNED, IDLE, TRAVERSE, COMPROMISED, COMPLETE };
 	State currentState = IDLE; // changed from NOT_ASSIGNED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	State previousState = NOT_ASSIGNED;
-	StateMachine() = default;
+	StateMachine() {
+		log.open("log.txt");
+	};
 	State GetCurrentState() { return currentState; }
 	State GetPreviousState() { return previousState; }
 	void SetState(State currentState);
@@ -50,7 +60,18 @@ public:
 	void CheckState();
 	void SetIdle();
 	void SetTraverse();
-	void SetRetreating();
+	void SetCompromised();
+	void SetComplete();
+	void ArmedSaveThrow();
+	void UnarmedSaveThrow();
+	void LockedDoorSaveThrow();
+	void ObstructionSaveThrow();
+	void setArmedProbability(int armed);
+	void setUnarmedProbability(int unarmed);
+	void setLockedDoorProbability(int locked);
+	void setObstructionProbability(int obstruction);
+	bool findEntity();
+
 	// new addition
 	void Deploy();
 };
@@ -73,37 +94,175 @@ void StateMachine::SwitchToPreviousState(State currentState) {
 void StateMachine::CheckState() {
 	switch (currentState) {
 	case IDLE:
-		if (/*In same room as entity*/) SetRetreating();
-		else if (/*Not in same room and scan complete*/) SetTraverse();
+		ArmedSaveThrow();
+		UnarmedSaveThrow();
+		LockedDoorSaveThrow();
+		
+
+		if (!compromisedCheck)
+		{
+			if (findEntity())//if not compromised and entities were found add actions and entityCount to log
+			{
+				log << "Scanned Room: " << ptr->room.getRoomID() << endl << "Room contains " << entityCount << endl << "Robot continued traversal\n" << "Appended\n" << endl;
+			}
+			else//if not compromised and no entities add to log
+			{
+				log << "Scanned Room: " << ptr->room.getRoomID() << endl << "Room contains no entities" << endl << "Robot continued traversal\n" << "Appended\n" << endl;
+			}
+			SetTraverse();
+		}
+		else//if compromised
+		{
+			if (findEntity())//need this because it also calculates entity count
+			{
+				log << "Scanned Room: " << ptr->room.getRoomID() << endl << "Room contains " << entityCount << endl << "Robot unable to continued traversal \n" << "Retreating\n" << endl;
+			}
+			SetCompromised();
+		}
+		
+		
+		
 		break;
 	case TRAVERSE:
-		if (/*In same room as entity*/) SetRetreating();
-		else if (/*Next room has not been scanned*/) SetIdle();
-		break;
-	case RETREATING:
-		if (/*No longer in the same room as entity and traversal not complete*/) SetIdle();
+		if (findNext(wayPoint, ptr))
+		{
+			// function has handled movement and waypoint assignment. 
+			SetIdle();
+		}
+		else if (wayPointIndex < wayPoint.size())
+		{
+			// need to assign ptr based on unused waypoint. 
+			ptr = wayPoint[wayPointIndex];
+			wayPointIndex++;
+			SetIdle();
+		}
+		else
+		{
+			log << "***End of the building reached***\n ***Returning to Headquaters.***\n";
+			SetComplete();
+		}
 		break;
 	default:
+
 		std::cout << "No state found for this state machine object\n";
 		break;
 	}
 }
 
-void StateMachine::SetIdle() {//Scan next room for entities before entering
+//checks to see if robot has been seen by an armed entity
+//returns true if armed entity has seen robot
+void StateMachine::ArmedSaveThrow() {
+	vector <Object* > tempV = ptr->room.getObjects();
+	for (int i = 0; i < tempV.size(); i++)
+	{
+		if ((*tempV[i]).getSymbol() == 'A')
+		{
+			if (ARMED_SAVE < rand() % 100)
+				compromisedCheck = false;
+			else
+				compromisedCheck = true;
+		}
+	}
+}
+
+//checks to see if robot has been seen by an unarmed entity
+//returns true if an unarmed entity has seen robot
+void StateMachine::UnarmedSaveThrow() {
+	vector <Object* > tempV = ptr->room.getObjects();
+	for (int i = 0; i < tempV.size(); i++)
+	{
+		if ((*tempV[i]).getSymbol() == 'E')
+		{
+			if (UNARMED_SAVE < rand() % 100)
+				compromisedCheck = false;
+			else
+				compromisedCheck = true;
+		}
+	}
+}
+
+//checks to see if robot has unlocked a door
+//return true if it unlocked the door
+void StateMachine::LockedDoorSaveThrow() {
+	vector <Object* > tempV = ptr->room.getObjects();
+	for (int i = 0; i < tempV.size(); i++)
+	{
+		if ((*tempV[i]).getSymbol() == 'L')
+		{
+			if (LOCKED_DOOR < rand() % 100)
+				lockedDoorCheck = true;
+			else
+				lockedDoorCheck = false;
+		}
+	}
+}
+
+//checks to see if their are entities in a room and counts all entities
+//returns true if entityCount>0
+bool StateMachine::findEntity() {
+	entityCount = 0;
+	vector <Object* > tempV = ptr->room.getObjects();
+	for (int i = 0; i < tempV.size(); i++)
+	{
+		if (((*tempV[i]).getSymbol() == 'E') || ((*tempV[i]).getSymbol() == 'A'))
+			entityCount++;
+	}
+	if (entityCount > 0)
+		return true;
+	else
+		return false;
+}
+
+//returns true if obstruction is a problem
+void StateMachine::ObstructionSaveThrow()
+{
+	vector <Object* > tempV = ptr->room.getObjects();
+	for (int i = 0; i < tempV.size(); i++)
+	{
+		if ((*tempV[i]).getSymbol() == 'O')
+		{
+			if (OBSTRUCTION < rand() % 100)
+				obstructionCheck = false;
+			else
+				obstructionCheck = true;
+		}
+	}
+}
+void StateMachine::SetIdle() {//sets state to IDLE
 	SetState(IDLE);
-
 }
 
-void StateMachine::SetTraverse() {//Finds next room to scan
+void StateMachine::SetTraverse() {//sets state to TRAVERSE
 	SetState(TRAVERSE);
-
 }
 
-void StateMachine::SetRetreating() {//Gets out of dodge to return map
-	SetState(RETREATING);
-
+void StateMachine::SetCompromised() {//sets state to COMPROMISED
+	SetState(COMPROMISED);
 }
 
+void StateMachine::SetComplete() {//sets state to COMPLETE
+	SetState(COMPLETE);
+}
+
+void StateMachine::setArmedProbability(int armed)
+{
+	ARMED_SAVE = armed;
+}
+
+void StateMachine::setUnarmedProbability(int unarmed)
+{
+	UNARMED_SAVE = unarmed;
+}
+
+void StateMachine::setLockedDoorProbability(int locked)
+{
+	LOCKED_DOOR = locked;
+}
+
+void StateMachine::setObstructionProbability(int obstruction)
+{
+	OBSTRUCTION = obstruction;
+}
 void StateMachine::Deploy()
 // this continually runs CheckState() until currentState == COMPLETE or COMPROMISED. 
 {
